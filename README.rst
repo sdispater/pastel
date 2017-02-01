@@ -38,4 +38,6 @@ Usage
 Installation
 ============
 
-``pip install pastel``
+.. code-block::
+
+    pip install pastel
