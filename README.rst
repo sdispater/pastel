@@ -10,7 +10,7 @@ It comes bundled with predefined styles:
 * ``question``: black on cyan
 * ``error``: white on red
 
-.. image:: assets/screenshot.png
+.. image:: https://raw.githubusercontent.com/sdispater/pastel/master/assets/screenshot.png
 
 
 Features
