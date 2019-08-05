@@ -24,3 +24,6 @@ nosetests.xml
 /test_*.py
 profile.html
 /wheelhouse
+
+.python-version
+/poetry.lock

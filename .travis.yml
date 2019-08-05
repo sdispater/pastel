@@ -20,6 +20,9 @@ install:
         virtualenv --python="$PYENV_ROOT/versions/pypy-$PYPY_VERSION/bin/python" "$HOME/virtualenvs/pypy-$PYPY_VERSION"
         source "$HOME/virtualenvs/pypy-$PYPY_VERSION/bin/activate"
       fi
-  - pip install -r tests-requirements.txt -U
+  - curl -fsS -o get-poetry.py https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py
+  - python get-poetry.py --preview -y
+  - source $HOME/.poetry/env
+  - poetry install
 
-script: py.test -q tests/
+script: poetry run pytest -q tests/
