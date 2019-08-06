@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pastel"
-version = "0.1.0"
+version = "0.1.1"
 description = "Bring colors to your terminal."
 authors = ["Sébastien Eustace <sebastien@eustace.io>"]
 license = "MIT"
