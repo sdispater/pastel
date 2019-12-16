@@ -27,3 +27,4 @@ profile.html
 
 .python-version
 /poetry.lock
+setup.py
