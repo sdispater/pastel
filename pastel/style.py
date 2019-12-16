@@ -6,34 +6,28 @@ from collections import OrderedDict
 class Style(object):
 
     FOREGROUND_COLORS = {
-        'black': 30,
-        'red': 31,
-        'green': 32,
-        'yellow': 33,
-        'blue': 34,
-        'magenta': 35,
-        'cyan': 36,
-        'white': 37
+        "black": 30,
+        "red": 31,
+        "green": 32,
+        "yellow": 33,
+        "blue": 34,
+        "magenta": 35,
+        "cyan": 36,
+        "white": 37,
     }
 
     BACKGROUND_COLORS = {
-        'black': 40,
-        'red': 41,
-        'green': 42,
-        'yellow': 43,
-        'blue': 44,
-        'magenta': 45,
-        'cyan': 46,
-        'white': 47
+        "black": 40,
+        "red": 41,
+        "green": 42,
+        "yellow": 43,
+        "blue": 44,
+        "magenta": 45,
+        "cyan": 46,
+        "white": 47,
     }
 
-    OPTIONS = {
-        'bold': 1,
-        'underscore': 4,
-        'blink': 5,
-        'reverse': 7,
-        'conceal': 8
-    }
+    OPTIONS = {"bold": 1, "underscore": 4, "blink": 5, "reverse": 7, "conceal": 8}
 
     def __init__(self, foreground=None, background=None, options=None):
         self._fg = foreground
@@ -68,10 +62,8 @@ class Style(object):
     def set_foreground(self, foreground):
         if foreground not in self.FOREGROUND_COLORS:
             raise ValueError(
-                'Invalid foreground specified: "{}". Expected one of ({})'
-                .format(
-                    foreground,
-                    ', '.join(self.FOREGROUND_COLORS.keys())
+                'Invalid foreground specified: "{}". Expected one of ({})'.format(
+                    foreground, ", ".join(self.FOREGROUND_COLORS.keys())
                 )
             )
 
@@ -80,10 +72,8 @@ class Style(object):
     def set_background(self, background):
         if background not in self.FOREGROUND_COLORS:
             raise ValueError(
-                'Invalid background specified: "{}". Expected one of ({})'
-                .format(
-                    background,
-                    ', '.join(self.BACKGROUND_COLORS.keys())
+                'Invalid background specified: "{}". Expected one of ({})'.format(
+                    background, ", ".join(self.BACKGROUND_COLORS.keys())
                 )
             )
 
@@ -92,10 +82,8 @@ class Style(object):
     def set_option(self, option):
         if option not in self.OPTIONS:
             raise ValueError(
-                'Invalid option specified: "{}". Expected one of ({})'
-                .format(
-                    option,
-                    ', '.join(self.OPTIONS.keys())
+                'Invalid option specified: "{}". Expected one of ({})'.format(
+                    option, ", ".join(self.OPTIONS.keys())
                 )
             )
 
@@ -105,10 +93,8 @@ class Style(object):
     def unset_option(self, option):
         if not option in self.OPTIONS:
             raise ValueError(
-                'Invalid option specified: "{}". Expected one of ({})'
-                    .format(
-                    option,
-                    ', '.join(self.OPTIONS.keys())
+                'Invalid option specified: "{}". Expected one of ({})'.format(
+                    option, ", ".join(self.OPTIONS.keys())
                 )
             )
 
@@ -135,7 +121,7 @@ class Style(object):
         if not len(codes):
             return text
 
-        return '\033[%sm%s\033[0m' % (';'.join(map(str, codes)), text)
+        return "\033[%sm%s\033[0m" % (";".join(map(str, codes)), text)
 
     def __eq__(self, other):
         return (

@@ -10,29 +10,29 @@ from .stack import StyleStack
 
 class Pastel(object):
 
-    TAG_REGEX = '[a-z][a-z0-9_=;-]*'
-    FULL_TAG_REGEX = re.compile('(?isx)<(({}) | /({})?)>'.format(TAG_REGEX, TAG_REGEX))
+    TAG_REGEX = "[a-z][a-z0-9_=;-]*"
+    FULL_TAG_REGEX = re.compile("(?isx)<(({}) | /({})?)>".format(TAG_REGEX, TAG_REGEX))
 
     def __init__(self, colorized=False):
         self._colorized = colorized
         self._style_stack = StyleStack()
         self._styles = {}
 
-        self.add_style('error', 'white', 'red')
-        self.add_style('info', 'green')
-        self.add_style('comment', 'yellow')
-        self.add_style('question', 'black', 'cyan')
+        self.add_style("error", "white", "red")
+        self.add_style("info", "green")
+        self.add_style("comment", "yellow")
+        self.add_style("question", "black", "cyan")
 
     @classmethod
     def escape(cls, text):
-        return re.sub('(?is)([^\\\\]?)<', '\\1\\<', text)
+        return re.sub("(?is)([^\\\\]?)<", "\\1\\<", text)
 
     @contextmanager
     def colorized(self, colorized=None):
         is_colorized = self.is_colorized()
 
         if colorized is None:
-            colorized= sys.stdout.isatty() and is_colorized
+            colorized = sys.stdout.isatty() and is_colorized
 
         self.with_colors(colorized)
 
@@ -60,12 +60,12 @@ class Pastel(object):
 
     def remove_style(self, name):
         if not self.has_style(name):
-            raise ValueError('Invalid style {}'.format(name))
+            raise ValueError("Invalid style {}".format(name))
 
         del self._styles[name]
 
     def colorize(self, message):
-        output = ''
+        output = ""
         tags = []
         i = 0
         for m in self.FULL_TAG_REGEX.finditer(message):
@@ -78,7 +78,7 @@ class Pastel(object):
             i += 1
 
         if not tags:
-            return message.replace('\\<', '<')
+            return message.replace("\\<", "<")
 
         offset = 0
         for t in tags:
@@ -87,18 +87,20 @@ class Pastel(object):
             endpos = t[4] if t[4] else -1
             text = t[0]
             if prev_offset < offset - len(text):
-                output += self._apply_current_style(message[prev_offset:offset - len(text)])
+                output += self._apply_current_style(
+                    message[prev_offset : offset - len(text)]
+                )
 
-            if offset != 0 and '\\' == message[offset - len(text) - 1]:
+            if offset != 0 and "\\" == message[offset - len(text) - 1]:
                 output += self._apply_current_style(text)
                 continue
 
             # opening tag?
-            open = '/' != text[1]
+            open = "/" != text[1]
             if open:
                 tag = t[2]
             else:
-                tag = t[3] if t[3] else ''
+                tag = t[3] if t[3] else ""
 
             style = self._create_style_from_string(tag.lower())
             if not open and not tag:
@@ -117,22 +119,22 @@ class Pastel(object):
 
         output += self._apply_current_style(message[offset:])
 
-        return output.replace('\\<', '<')
+        return output.replace("\\<", "<")
 
     def _create_style_from_string(self, string):
         if string in self._styles:
             return self._styles[string]
 
-        matches = re.findall('([^=]+)=([^;]+)(;|$)', string.lower())
+        matches = re.findall("([^=]+)=([^;]+)(;|$)", string.lower())
         if not len(matches):
             return False
 
         style = Style()
 
         for match in matches:
-            if match[0] == 'fg':
+            if match[0] == "fg":
                 style.set_foreground(match[1])
-            elif match[0] == 'bg':
+            elif match[0] == "bg":
                 style.set_background(match[1])
             else:
                 try:
