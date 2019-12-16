@@ -10,7 +10,7 @@ from .stack import StyleStack
 
 class Pastel(object):
 
-    TAG_REGEX = "[a-z][a-z0-9_=;-]*"
+    TAG_REGEX = "[a-z][a-z0-9,_=;-]*"
     FULL_TAG_REGEX = re.compile("(?isx)<(({}) | /({})?)>".format(TAG_REGEX, TAG_REGEX))
 
     def __init__(self, colorized=False):
@@ -138,7 +138,8 @@ class Pastel(object):
                 style.set_background(match[1])
             else:
                 try:
-                    style.set_option(match[1])
+                    for option in match[1].split(","):
+                        style.set_option(option.strip())
                 except ValueError:
                     return False
 

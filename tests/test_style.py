@@ -6,17 +6,17 @@ from pastel.style import Style
 
 
 def test_init():
-    style = Style("green", "black", ["bold", "underscore"])
+    style = Style("green", "black", ["bold", "underline"])
     assert "\033[32;40;1;4mfoo\033[0m" == style.apply("foo")
     assert "green" == style.foreground
     assert "black" == style.background
-    assert ["bold", "underscore"] == style.options
+    assert ["bold", "underline"] == style.options
 
     style = Style("red", None, ["blink"])
     assert "\033[31;5mfoo\033[0m" == style.apply("foo")
 
     style = Style(None, "white")
-    assert "\033[47mfoo\033[0m" == style.apply("foo")
+    assert "\033[107mfoo\033[0m" == style.apply("foo")
 
     style = Style("red", None, "blink")
     assert "\033[31;5mfoo\033[0m" == style.apply("foo")

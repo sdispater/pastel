@@ -21,7 +21,7 @@ def test_bundled_styles(pastel):
     assert pastel.has_style("comment")
     assert pastel.has_style("question")
 
-    assert "\033[37;41msome error\033[0m" == pastel.colorize(
+    assert "\033[97;41msome error\033[0m" == pastel.colorize(
         "<error>some error</error>"
     )
     assert "\033[32msome info\033[0m" == pastel.colorize("<info>some info</info>")
@@ -35,13 +35,13 @@ def test_bundled_styles(pastel):
 
 def test_nested_styles(pastel):
     assert (
-        "\033[37;41msome \033[0m\033[32msome info\033[0m\033[37;41m error\033[0m"
+        "\033[97;41msome \033[0m\033[32msome info\033[0m\033[97;41m error\033[0m"
         == pastel.colorize("<error>some <info>some info</info> error</error>")
     )
 
 
 def test_adjacent_style(pastel):
-    assert "\033[37;41msome error\033[0m\033[32msome info\033[0m" == pastel.colorize(
+    assert "\033[97;41msome error\033[0m\033[32msome info\033[0m" == pastel.colorize(
         "<error>some error</error><info>some info</info>"
     )
 
@@ -58,7 +58,7 @@ def test_style_escaping(pastel):
 
 def test_deep_nested_style(pastel):
     assert (
-        "\033[37;41merror\033[0m\033[32minfo\033[0m\033[33mcomment\033[0m\033[37;41merror\033[0m"
+        "\033[97;41merror\033[0m\033[32minfo\033[0m\033[33mcomment\033[0m\033[97;41merror\033[0m"
         == pastel.colorize(
             "<error>error<info>info<comment>comment</comment></info>error</error>"
         )
@@ -73,7 +73,7 @@ def test_new_style(pastel):
     pastel.add_style("b", "blue", "white")
 
     assert (
-        "\033[34;47msome \033[0m\033[34;47mcustom\033[0m\033[34;47m msg\033[0m"
+        "\033[34;107msome \033[0m\033[34;107mcustom\033[0m\033[34;107m msg\033[0m"
         == pastel.colorize("<test>some <b>custom</b> msg</test>")
     )
 
@@ -91,7 +91,7 @@ def test_new_style(pastel):
 def test_redefined_style(pastel):
     pastel.add_style("info", "blue", "white")
 
-    assert "\033[34;47msome custom msg\033[0m" == pastel.colorize(
+    assert "\033[34;107msome custom msg\033[0m" == pastel.colorize(
         "<info>some custom msg</info>"
     )
 
@@ -134,7 +134,7 @@ def test_non_decorated_pastel(non_decorated_pastel):
 
     pastel.with_colors(True)
 
-    assert "\033[37;41msome error\033[0m" == pastel.colorize(
+    assert "\033[97;41msome error\033[0m" == pastel.colorize(
         "<error>some error</error>"
     )
     assert "\033[32msome info\033[0m" == pastel.colorize("<info>some info</info>")
