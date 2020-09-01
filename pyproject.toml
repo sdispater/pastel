@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pastel"
-version = "0.2.0"
+version = "0.2.1-alpha.0"
 description = "Bring colors to your terminal."
 authors = ["Sébastien Eustace <sebastien@eustace.io>"]
 license = "MIT"
@@ -23,5 +23,5 @@ pytest-mock = "^1.10.4"
 tox = "^3.13.2"
 
 [build-system]
-requires = ["poetry>=1.0.0"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=1.0.0a9"]
+build-backend = "poetry.core.masonry.api"
