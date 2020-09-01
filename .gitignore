@@ -26,5 +26,4 @@ profile.html
 /wheelhouse
 
 .python-version
-/poetry.lock
 setup.py
